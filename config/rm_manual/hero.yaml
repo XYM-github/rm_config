@@ -11,11 +11,11 @@ rm_manual:
     accel_z:
       - [ 50.0,6.0 ]
       - [ 200.0,15.0 ]
-    safety_power: 200.0
+    safety_power: 60
     capacitor_threshold: 0.1
     charge_power: 20
     extra_power: 30
-    burst_power: 200
+    burst_power: 380
   vel:
     topic: "/cmd_vel"
     power_limit_topic: "/controllers/chassis_controller/command"
@@ -73,9 +73,12 @@ rm_manual:
       - controllers/trigger_calibration_controller
 
   shooter_calibration:
-    - start_controller: controllers/trigger_calibration_controller
-      stop_controller: controllers/shooter_controller
-      service_name: /controllers/trigger_calibration_controller/is_calibrated
+    - start_controllers:
+        - controllers/trigger_calibration_controller
+      stop_controllers:
+        - controllers/shooter_controller
+      services_name:
+        - /controllers/trigger_calibration_controller/is_calibrated
 
   ui:
     trigger_change:
